@@ -3,17 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gradient_animation_text/flutter_gradient_animation_text.dart';
 import 'login_page.dart';
 
-class MyLoginPage extends StatelessWidget {
-  const MyLoginPage({Key? key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: RegisterPage(),
-    );
-  }
-}
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key});
@@ -95,10 +85,7 @@ class _LoginPageState extends State<RegisterPage> {
 
                 TextButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginPage())
-                    );
-
+                    Navigator.pop(context);
                   },
                   child: Text(
                     "Login",
@@ -207,12 +194,14 @@ class _LoginPageState extends State<RegisterPage> {
                 width: 300,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: customColor,
                   ),
                   child: Text(
-                    "Login",
+                    "Register",
                     style: GoogleFonts.istokWeb(
                       fontWeight: FontWeight.w700,
                       fontSize: 20,

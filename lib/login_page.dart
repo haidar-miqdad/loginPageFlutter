@@ -4,17 +4,6 @@ import 'package:flutter_gradient_animation_text/flutter_gradient_animation_text.
 import 'package:lottie/lottie.dart';
 import 'register_page.dart';
 
-class MyLoginPage extends StatelessWidget {
-  const MyLoginPage({Key? key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: LoginPage(),
-    );
-  }
-}
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key});
@@ -25,8 +14,13 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   Color customColor = const Color(0xFF5F7C8D);
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  void setDataUser(Map<String, dynamic> user) {
+    _emailController.text = user['email'];
+  }
+
 
   ///input pass
   bool _isHidden = true;
@@ -116,9 +110,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 TextButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => RegisterPage())
-                    );
+                    Navigator.pushNamed(context, '/register');
                   },
                   child: Text(
                     "SignUp",
@@ -149,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                 child: TextField(
-                  controller: _nameController,
+                  controller: _emailController,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.email_outlined),
                     labelText: 'Enter your email',
@@ -193,8 +185,27 @@ class _LoginPageState extends State<LoginPage> {
                 width: 300,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {
-
+                  onPressed: () async {
+                    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text('yehhh!!'),
+                          content: Text(' isi heula eta na tahhh!!\n ieu naa\n naon sih\n eta na tah, tekspild'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text('syapp'),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      final result = await Navigator.pushNamed(context, '/another', arguments: {
+                        'email': _emailController.text,
+                        'password': _passwordController.text
+                      });
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: customColor,
