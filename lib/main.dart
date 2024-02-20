@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
         ),
        initialRoute: '/',
       routes: {
-          '/': (context) => const LoginPage(),
-        '/register': (context) => const RegisterPage(),
+          '/': (context) => const MainScreen(),
+        '/register': (context) => const MainScreenRegister(),
         '/another': (context) {
           final Map<String, dynamic> user = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
           return AnotherPage(user: user);
